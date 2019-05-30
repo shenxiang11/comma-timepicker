@@ -1,10 +1,15 @@
 {
   "name": "comma-timepicker",
   "version": "0.1.0",
-  "private": true,
+  "main": "lib/comma-timepicker.umd.min.js",
+  "author": {
+    "name": "shenxiang11",
+    "email": "863461783@qq.com"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "lib": "vue-cli-service build --target lib './src/index.js' --dest=lib",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
