@@ -10,11 +10,11 @@
       @click.stop="toggleDropdown"
       type="text"
       readonly />
-    <i
+    <span
       @click="clearTime"
-      class="clear-btn el-input__icon el-icon-circle-close"
+      class="clear-btn"
       v-show="!!displayTime && isMouseOver"
-    ></i>
+    >&times;</span>
     <div
       class="time-picker-overlay"
       v-if="showDropdown"
@@ -70,9 +70,14 @@
             @click.stop="select('apm', a)"></li>
         </ul>
       </div>
-      <div
-        class="comfirm-btn"
-        @click="hide">确定</div>
+      <div class="btns">
+        <div
+          class="cancel-btn"
+          @click="setToLast">取消</div>
+        <div
+          class="comfirm-btn"
+          @click="hide">确定</div>
+      </div>
     </div>
   </span>
 </template>
@@ -156,9 +161,22 @@ export default {
     },
     value: 'readValues',
     displayTime: 'fillValues',
+    showDropdown: {
+      immediate: true,
+      handler() {
+        this.recordLast();
+      },
+    },
   },
 
   methods: {
+    setToLast() {
+      this.hour = this.lastHour;
+      this.minute = this.lastMinute;
+      this.second = this.lastSecond;
+      this.apm = this.lastApm;
+      this.hide();
+    },
     hide() {
       this.showDropdown = false;
     },
@@ -455,10 +473,18 @@ export default {
       this.second = '';
       this.apm = '';
     },
+
+    recordLast() {
+      this.lastHour = this.hour;
+      this.lastMinute = this.minute;
+      this.lastSecond = this.second;
+      this.lastApm = this.apm;
+    },
   },
 
   mounted() {
     this.renderFormat();
+    this.recordLast();
   },
 };
 </script>

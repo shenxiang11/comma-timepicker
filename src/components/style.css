@@ -27,12 +27,19 @@
   position: absolute;
   right: 5px;
   top: 50%;
-  transform: transformY(-50%);
+  border-radius: 50%;
+  transform: translateY(-50%);
   transition: color .2s;
+  width: 16px;
+  height: 16px;
+  line-height: 14px;
+  font-size: 12px;
+  text-align: center;
+  border: 1px solid #dcdfe6;
+  color: #dcdfe6;
 }
 
 .time-picker .clear-btn:hover {
-  color: #797979;
   cursor: pointer;
 }
 
@@ -110,11 +117,27 @@
   background-color: #fff;
 }
 
+.btns {
+  display: flex;
+  height: 30px;
+  font-size: 12px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+}
+
 .comfirm-btn {
+  width: 0;
+  flex-grow: 1;
   background-color: #ff674d;
   color: #fff;
-  height: 30px;
   line-height: 30px;
-  font-size: 12px;
   cursor: pointer;
+  text-align: center;
+}
+.cancel-btn {
+  width: 0;
+  flex-grow: 1;
+  line-height: 30px;
+  cursor: pointer;
+  text-align: center;
+  background-color: #fff;
 }
