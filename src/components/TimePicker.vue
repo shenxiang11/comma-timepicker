@@ -70,6 +70,9 @@
             @click.stop="select('apm', a)"></li>
         </ul>
       </div>
+      <div
+        class="comfirm-btn"
+        @click="hide">确定</div>
     </div>
   </span>
 </template>
@@ -156,6 +159,9 @@ export default {
   },
 
   methods: {
+    hide() {
+      this.showDropdown = false;
+    },
     showClear() {
       this.isMouseOver = true;
     },

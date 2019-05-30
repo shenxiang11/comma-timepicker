@@ -1,6 +1,7 @@
 .time-picker {
   display: inline-block;
   position: relative;
+  width: 100%;
   vertical-align: middle;
 }
 
@@ -24,25 +25,9 @@
 
 .time-picker .clear-btn {
   position: absolute;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  margin-top: -0.15em;
-  z-index: 3;
-  font-size: 1.1em;
-  line-height: 1em;
-  vertical-align: middle;
-  width: 1.3em;
-  color: #d2d2d2;
-  background: rgba(255,255,255,0);
-  text-align: center;
-  font-style: normal;
-
-  -webkit-transition: color .2s;
+  right: 5px;
+  top: 50%;
+  transform: transformY(-50%);
   transition: color .2s;
 }
 
@@ -119,8 +104,17 @@
 .time-picker .dropdown .hint {
   color: #a5a5a5;
   cursor: default;
-  font-size: 0.8em;
+  font-size: 12px;
   position: sticky;
   top: 0;
   background-color: #fff;
+}
+
+.comfirm-btn {
+  background-color: #ff674d;
+  color: #fff;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+  cursor: pointer;
 }
