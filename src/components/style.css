@@ -13,9 +13,26 @@
   border: 1px solid #dcdfe6;
   width: 100%;
   border-radius: 4px;
-  height: 40px;
+  height: 32px;
   padding: 0 15px;
-  font-size: 14px;
+  font-size: 13px;
+}
+
+input[disabled] {
+  background-color: #f5f7fa;
+}
+
+input::-webkit-input-placeholder{
+  color:#606266;
+}
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+  color:#606266;
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+  color:#606266;
+}
+input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+  color:#606266;
 }
 
 .time-picker input.display-time:focus {
@@ -60,13 +77,13 @@
   background: #fff;
   box-shadow: 0 1px 6px rgba(0,0,0,0.15);
   width: 10em;
-  height: 10em;
+  height: 20em;
   font-weight: normal;
 }
 
 .time-picker .dropdown .select-list {
   width: 10em;
-  height: 10em;
+  height: 20em;
   overflow: hidden;
   display: flex;
   flex-flow: row nowrap;
@@ -117,7 +134,7 @@
   background-color: #fff;
 }
 
-.btns {
+.c-btns-wrapper {
   display: flex;
   height: 30px;
   font-size: 12px;

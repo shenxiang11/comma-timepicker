@@ -6,14 +6,16 @@
     <input
       class="display-time"
       :id="id"
+      :disabled="disabled"
       v-model="displayTime"
       @click.stop="toggleDropdown"
       type="text"
+      :placeholder="placeholder"
       readonly />
     <span
       @click="clearTime"
       class="clear-btn"
-      v-show="!!displayTime && isMouseOver"
+      v-show="!!displayTime && isMouseOver && !disabled"
     >&times;</span>
     <div
       class="time-picker-overlay"
@@ -70,7 +72,7 @@
             @click.stop="select('apm', a)"></li>
         </ul>
       </div>
-      <div class="btns">
+      <div class="c-btns-wrapper">
         <div
           class="cancel-btn"
           @click="setToLast">取消</div>
@@ -94,7 +96,17 @@ export default {
   name: 'VueTimepicker',
 
   props: {
-    value: { type: Object },
+    placeholder: {
+      type: String,
+      default: '',
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    value: {
+      type: String,
+    },
     hideClearButton: { type: Boolean },
     format: { type: String },
     minuteInterval: { type: Number },
@@ -124,6 +136,15 @@ export default {
   },
 
   computed: {
+    fValue() {
+      if (toString.call(this.value) === '[object String]') {
+        return {
+          HH: this.value.split(':')[0],
+          mm: this.value.split(':')[1],
+        };
+      }
+      return {};
+    },
     displayTime() {
       let formatString = String((this.format || 'HH:mm'));
       if (this.hour) {
@@ -160,7 +181,10 @@ export default {
       this.renderList('second', newInteval);
     },
     value: 'readValues',
-    displayTime: 'fillValues',
+    displayTime() {
+      this.fillValues();
+      this.$emit('change', this.value);
+    },
     showDropdown: {
       immediate: true,
       handler() {
@@ -296,9 +320,9 @@ export default {
     },
 
     readValues() {
-      if (!this.value || this.muteWatch) { return; }
+      if (!this.fValue || this.muteWatch) { return; }
 
-      const timeValue = JSON.parse(JSON.stringify(this.value || {}));
+      const timeValue = JSON.parse(JSON.stringify(this.fValue || {}));
 
       const values = Object.keys(timeValue);
       if (values.length === 0) { return; }
@@ -433,7 +457,7 @@ export default {
 
       const self = this;
 
-      const baseTimeValue = JSON.parse(JSON.stringify(this.value || {}));
+      const baseTimeValue = JSON.parse(JSON.stringify(this.fValue || {}));
       const timeValue = {};
 
       Object.keys(baseTimeValue).forEach((key) => {
@@ -452,7 +476,11 @@ export default {
     },
 
     toggleDropdown() {
-      this.showDropdown = !this.showDropdown;
+      if (this.showDropdown) {
+        this.setToLast();
+      } else {
+        this.showDropdown = !this.showDropdown;
+      }
     },
 
     select(type, value) {
@@ -489,6 +517,6 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
   @import './style.css';
 </style>
